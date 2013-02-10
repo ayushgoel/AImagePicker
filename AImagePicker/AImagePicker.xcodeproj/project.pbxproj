@@ -17,6 +17,7 @@
 		2AF5A86416C7D6A300E93899 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AF5A86316C7D6A300E93899 /* Default@2x.png */; };
 		2AF5A86616C7D6A300E93899 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2AF5A86516C7D6A300E93899 /* Default-568h@2x.png */; };
 		2AF5A86916C7D6A300E93899 /* FirstScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF5A86816C7D6A300E93899 /* FirstScreenViewController.m */; };
+		2AF5A87416C8117500E93899 /* ImagePreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2AF5A87316C8117400E93899 /* ImagePreViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		2AF5A86516C7D6A300E93899 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2AF5A86716C7D6A300E93899 /* FirstScreenViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstScreenViewController.h; sourceTree = "<group>"; };
 		2AF5A86816C7D6A300E93899 /* FirstScreenViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstScreenViewController.m; sourceTree = "<group>"; };
+		2AF5A87216C8117400E93899 /* ImagePreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImagePreViewController.h; sourceTree = "<group>"; };
+		2AF5A87316C8117400E93899 /* ImagePreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImagePreViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				2AF5A85F16C7D6A300E93899 /* AIPAppDelegate.m */,
 				2AF5A86716C7D6A300E93899 /* FirstScreenViewController.h */,
 				2AF5A86816C7D6A300E93899 /* FirstScreenViewController.m */,
+				2AF5A87216C8117400E93899 /* ImagePreViewController.h */,
+				2AF5A87316C8117400E93899 /* ImagePreViewController.m */,
 				2AF5A85616C7D6A300E93899 /* Supporting Files */,
 			);
 			path = AImagePicker;
@@ -173,6 +178,7 @@
 				2AF5A85C16C7D6A300E93899 /* main.m in Sources */,
 				2AF5A86016C7D6A300E93899 /* AIPAppDelegate.m in Sources */,
 				2AF5A86916C7D6A300E93899 /* FirstScreenViewController.m in Sources */,
+				2AF5A87416C8117500E93899 /* ImagePreViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
