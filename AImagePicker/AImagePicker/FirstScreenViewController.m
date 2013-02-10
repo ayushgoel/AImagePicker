@@ -12,8 +12,8 @@
 #define TOOLBAR_HEIGHT 30.0
 
 @interface FirstScreenViewController () <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ImagePreViewControllerDelegate>
-@property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UIToolbar *toolBar;
+@property (nonatomic, retain) UIImageView *imageView;
+@property (nonatomic, retain) UIToolbar *toolBar;
 @end
 
 @implementation FirstScreenViewController
