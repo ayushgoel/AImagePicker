@@ -23,6 +23,7 @@
 {
   [super viewDidLoad];
   self.imageView = [[[UIImageView alloc] initWithFrame:self.view.bounds] autorelease];
+  self.imageView.contentMode = UIViewContentModeScaleAspectFit;
   self.toolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height - TOOLBAR_HEIGHT, self.view.bounds.size.width, TOOLBAR_HEIGHT)] autorelease];
   self.toolBar.barStyle = UIBarStyleBlackTranslucent;
 
@@ -64,8 +65,20 @@
   }];
 }
 
+- (void)useSelectedImage:(UIImage *)image {
+  self.imageView.image = image;
+}
+
 #pragma UIImagePickerControllerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+  UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+  if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
+    [self useSelectedImage:image];
+  } else {
+    //fixme: Use another ViewController to show the selected image
+    // call useSelectedImage from there.
+    [self useSelectedImage:image];
+  }
   [self dismissImagePickerController];
 }
 
