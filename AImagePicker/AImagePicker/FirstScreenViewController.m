@@ -12,13 +12,19 @@
 #define TOOLBAR_HEIGHT 30.0
 
 @interface FirstScreenViewController () <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ImagePreViewControllerDelegate>
+
 @property (nonatomic, retain) UIImageView *imageView;
 @property (nonatomic, retain) UIToolbar *toolBar;
+@property (nonatomic, retain) ImagePreViewController *imagePreviewController;
+@property (nonatomic, retain) UIImagePickerController *imagePickerController;
+
 @end
 
 @implementation FirstScreenViewController
 @synthesize imageView = imageView_;
 @synthesize toolBar = toolBar_;
+@synthesize imagePreviewController = imagePreviewController_;
+@synthesize imagePickerController = imagePickerController_;
 
 - (void)viewDidLoad
 {
@@ -33,20 +39,17 @@
 
   [self.view addSubview:self.imageView];
   [self.view addSubview:self.toolBar];
-	// Do any additional setup after loading the view, typically from a nib.
-}
 
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+  self.imagePreviewController = [[[ImagePreViewController alloc] init] autorelease];
+  self.imagePreviewController.delegate = self;
+  self.imagePickerController = [[[UIImagePickerController alloc] init] autorelease];
+  self.imagePickerController.delegate = self;
 }
 
 - (void)showImagePickerControllerWithSource:(UIImagePickerControllerSourceType)sourceType {
   if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
-    UIImagePickerController *imagePickerController = [[[UIImagePickerController alloc] init] autorelease];
-    imagePickerController.delegate = self;
-    [self presentModalViewController:imagePickerController animated:YES];
+    self.imagePickerController.sourceType = sourceType;
+    [self presentModalViewController:self.imagePickerController animated:YES];
   }
 }
 
@@ -77,10 +80,8 @@
   if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
     [self useSelectedImage:image];
   } else {
-    ImagePreViewController *previewController = [[[ImagePreViewController alloc] init] autorelease];
-    previewController.image = image;
-    previewController.delegate = self;
-    [picker pushViewController:previewController animated:YES];
+    self.imagePreviewController.image = image;
+    [picker pushViewController:self.imagePreviewController animated:YES];
   }
 }
 
