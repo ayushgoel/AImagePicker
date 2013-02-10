@@ -48,7 +48,6 @@
   }
 }
 
-#pragma UIInteractions
 - (void)buttonPressed {
   UIActionSheet *pickSource = [[UIActionSheet alloc] initWithTitle:nil
                                                           delegate:self
@@ -57,6 +56,21 @@
                                                  otherButtonTitles:@"Open Camera", @"Open Library", nil];
   pickSource.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
   [pickSource showInView:self.view];
+}
+
+- (void)dismissImagePickerController {
+  [self dismissViewControllerAnimated:YES completion:^{
+    NSLog(@"ImagePicker dismissed");
+  }];
+}
+
+#pragma UIImagePickerControllerDelegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+  [self dismissImagePickerController];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+  [self dismissImagePickerController];  
 }
 
 #pragma UIActionSheetDelegate
