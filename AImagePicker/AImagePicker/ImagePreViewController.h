@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ImagePreViewControllerDelegate <NSObject>
+
+- (void)useSelectedImage:(UIImage *)image;
+
+@end
+
 @interface ImagePreViewController : UIViewController
+
+@property (nonatomic, retain) UIImage *image;
+@property (nonatomic, retain) id<ImagePreViewControllerDelegate> delegate;
 
 @end

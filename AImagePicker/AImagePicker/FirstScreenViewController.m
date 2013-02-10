@@ -7,10 +7,11 @@
 //
 
 #import "FirstScreenViewController.h"
+#import "ImagePreViewController.h"
 
 #define TOOLBAR_HEIGHT 30.0
 
-@interface FirstScreenViewController () <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface FirstScreenViewController () <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ImagePreViewControllerDelegate>
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIToolbar *toolBar;
 @end
@@ -67,6 +68,7 @@
 
 - (void)useSelectedImage:(UIImage *)image {
   self.imageView.image = image;
+  [self dismissImagePickerController];
 }
 
 #pragma UIImagePickerControllerDelegate
@@ -75,11 +77,11 @@
   if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
     [self useSelectedImage:image];
   } else {
-    //fixme: Use another ViewController to show the selected image
-    // call useSelectedImage from there.
-    [self useSelectedImage:image];
+    ImagePreViewController *previewController = [[[ImagePreViewController alloc] init] autorelease];
+    previewController.image = image;
+    previewController.delegate = self;
+    [picker pushViewController:previewController animated:YES];
   }
-  [self dismissImagePickerController];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
@@ -87,7 +89,7 @@
 }
 
 #pragma UIActionSheetDelegate
-// Cancel not handled, as no UI interaction required for it here.
+// "Cancel" not handled, as no UI interaction required for it here.
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
   if (buttonIndex == 0) {
     [self showImagePickerControllerWithSource:UIImagePickerControllerSourceTypeCamera];
