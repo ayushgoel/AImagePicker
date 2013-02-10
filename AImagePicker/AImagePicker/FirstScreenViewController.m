@@ -10,7 +10,7 @@
 
 #define TOOLBAR_HEIGHT 30.0
 
-@interface FirstScreenViewController () <UIActionSheetDelegate>
+@interface FirstScreenViewController () <UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIToolbar *toolBar;
 @end
@@ -40,15 +40,33 @@
   // Dispose of any resources that can be recreated.
 }
 
+- (void)showImagePickerControllerWithSource:(UIImagePickerControllerSourceType)sourceType {
+  if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+    UIImagePickerController *imagePickerController = [[[UIImagePickerController alloc] init] autorelease];
+    imagePickerController.delegate = self;
+    [self presentModalViewController:imagePickerController animated:YES];
+  }
+}
+
+#pragma UIInteractions
 - (void)buttonPressed {
-  UIActionSheet *pickSource = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Open Camera", @"Open Library", nil];
+  UIActionSheet *pickSource = [[UIActionSheet alloc] initWithTitle:nil
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Cancel"
+                                            destructiveButtonTitle:nil
+                                                 otherButtonTitles:@"Open Camera", @"Open Library", nil];
   pickSource.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
   [pickSource showInView:self.view];
 }
 
 #pragma UIActionSheetDelegate
+// Cancel not handled, as no UI interaction required for it here.
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-
+  if (buttonIndex == 0) {
+    [self showImagePickerControllerWithSource:UIImagePickerControllerSourceTypeCamera];
+  } else if (buttonIndex == 1) {
+    [self showImagePickerControllerWithSource:UIImagePickerControllerSourceTypePhotoLibrary];
+  }
 }
 
 @end
